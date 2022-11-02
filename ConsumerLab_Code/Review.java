@@ -19,12 +19,46 @@ public class Review {
   
   public static void main(String[] args){
 
-    System.out.println("Total sentiment value of review is: " + totalSentiment("/workspace/workspace/ConsumerLab_Code/SimpleReview.txt"));
+    System.out.println("TOTAL OF REVIEW: " + totalSentiment("/workspace/workspace/ConsumerLab_Code/review.txt"));
+    System.out.println("STAR RATING: " + starRating("/workspace/workspace/ConsumerLab_Code/review.txt"));
+  }
 
+  public static String fakeReview(String fileName) {
+    String review = textToString(fileName); 
+    review = removePunctuation(review);
+    review += " ";
+    int numWords = countWordsUsingSplit(review);
+    String fakeReview = " ";
+
+    for(int i = 0; i < numWords; i ++){
+      String word = review.substring(0, review.indexOf(" "));
+      //System.out.println("Sentiment value of \"" + word + "\" is: " + thumb);
+
+      if (word.substring(review.indexOf(" "), review.indexOf(" ") + 1).equals("*")){
+        fakeReview += word.replace(review.substring(0, review.indexOf(" ")), randomPositiveAdj());
+      }
+
+      fakeReview += sentimentVal(word);
+      review = review.substring(review.indexOf(" ")+1);
+    } 
+    String SMTHHERE = " ";
+      return SMTHHERE;
+  }
+
+  public static int starRating(String fileName){
+      double totalVal = totalSentiment(fileName);
+      int rating = 0;
+      if (totalVal >= 10) { rating = 5;}
+      else if (totalVal >= 5) { rating = 4; }
+      else if (totalVal >= 2.5) { rating = 3; }
+      else if (totalVal >= 0) { rating = 2; }
+      else if (totalVal >= -0.5) { rating = 1; }
+      else { rating = 0; }
+      return rating;
   }
 
   public static double totalSentiment(String fileName){
-    String review = textToString(fileName);
+    String review = textToString(fileName); 
     review = removePunctuation(review);
     review += " ";
     int numWords = countWordsUsingSplit(review);
@@ -32,15 +66,12 @@ public class Review {
 
     for(int i = 0; i < numWords; i ++){
       String word = review.substring(0, review.indexOf(" "));
-      double thumb = sentimentVal(word);
-      System.out.println("Sentiment value of \"" + word + "\" is: " + thumb);
+      //System.out.println("Sentiment value of \"" + word + "\" is: " + thumb);
       total += sentimentVal(word);
       review = review.substring(review.indexOf(" ")+1);
     }
     
-    // System.out.println(" TOTAL OF REVIEW: " + total);
     return total;
-
   }
 
   public static int countWordsUsingSplit(String review){
