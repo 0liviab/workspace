@@ -19,10 +19,14 @@ public class Review {
   
   public static void main(String[] args){
 
-    System.out.println("TOTAL OF REVIEW: " + totalSentiment("/workspace/workspace/ConsumerLab_Code/review.txt"));
-    System.out.println("STAR RATING: " + starRating("/workspace/workspace/ConsumerLab_Code/review.txt"));
+    System.out.println("OG Review: " + textToString("/workspace/workspace/ConsumerLab_Code/SimpleReview.txt"));
+    System.out.println("NEW Review: " + fakeReview("/workspace/workspace/ConsumerLab_Code/SimpleReview.txt"));
+
+    //System.out.println("TOTAL OF REVIEW: " + totalSentiment("/workspace/workspace/ConsumerLab_Code/review.txt"));
+    //System.out.println("STAR RATING: " + starRating("/workspace/workspace/ConsumerLab_Code/review.txt"));
   }
 
+  
   public static String fakeReview(String fileName) {
     String review = textToString(fileName); 
     review = removePunctuation(review);
@@ -32,17 +36,14 @@ public class Review {
 
     for(int i = 0; i < numWords; i ++){
       String word = review.substring(0, review.indexOf(" "));
-      //System.out.println("Sentiment value of \"" + word + "\" is: " + thumb);
 
-      if (word.substring(review.indexOf(" "), review.indexOf(" ") + 1).equals("*")){
-        fakeReview += word.replace(review.substring(0, review.indexOf(" ")), randomPositiveAdj());
+      if (word.substring(word.length()-1, review.length()).equals("*")){
+        fakeReview += word.replace(review.substring(0, review.indexOf(" ")), randomAdjective());
       }
 
-      fakeReview += sentimentVal(word);
       review = review.substring(review.indexOf(" ")+1);
     } 
-    String SMTHHERE = " ";
-      return SMTHHERE;
+      return fakeReview;
   }
 
   public static int starRating(String fileName){
