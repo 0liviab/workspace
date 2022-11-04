@@ -20,14 +20,16 @@ public class Review {
   public static void main(String[] args){
 
     System.out.println("OG Review: " + textToString("/workspace/workspace/ConsumerLab_Code/SimpleReview.txt"));
-    System.out.println("NEW Review: " + fakeReview("/workspace/workspace/ConsumerLab_Code/SimpleReview.txt"));
+    System.out.println("NEW POSITIVE Review: " + fakePosReview("/workspace/workspace/ConsumerLab_Code/SimpleReview.txt"));
+    System.out.println("NEW NEGATIVE Review: " + fakeNegReview("/workspace/workspace/ConsumerLab_Code/SimpleReview.txt"));
+
 
     //System.out.println("TOTAL OF REVIEW: " + totalSentiment("/workspace/workspace/ConsumerLab_Code/review.txt"));
     //System.out.println("STAR RATING: " + starRating("/workspace/workspace/ConsumerLab_Code/review.txt"));
   }
 
   
-  public static String fakeReview(String fileName) {
+  public static String fakePosReview(String fileName) {
     String review = textToString(fileName); 
     review = removePunctuation(review);
     review += " ";
@@ -37,8 +39,31 @@ public class Review {
     for(int i = 0; i < numWords; i ++){
       String word = review.substring(0, review.indexOf(" "));
 
-      if (word.substring(word.length()-1, review.length()).equals("*")){
-        fakeReview += word.replace(review.substring(0, review.indexOf(" ")), randomAdjective());
+      if (word.substring(0, 1).equals("*")){
+        fakeReview += " " + word.replace(review.substring(0, review.indexOf(" ")), randomPositiveAdj());
+      } else {
+        fakeReview += " " + word;
+      }
+
+      review = review.substring(review.indexOf(" ")+1);
+    } 
+      return fakeReview;
+  }
+
+  public static String fakeNegReview(String fileName) {
+    String review = textToString(fileName); 
+    review = removePunctuation(review);
+    review += " ";
+    int numWords = countWordsUsingSplit(review);
+    String fakeReview = " ";
+
+    for(int i = 0; i < numWords; i ++){
+      String word = review.substring(0, review.indexOf(" "));
+
+      if (word.substring(0, 1).equals("*")){
+        fakeReview += " " + word.replace(review.substring(0, review.indexOf(" ")), randomNegativeAdj());
+      } else {
+        fakeReview += " " + word;
       }
 
       review = review.substring(review.indexOf(" ")+1);
@@ -111,7 +136,7 @@ public class Review {
  
   //read in the negative adjectives in negativeAdjectives.txt
      try {
-      Scanner input = new Scanner(new File("n/workspace/workspace/ConsumerLab_Code/negativeAdjectives.txt"));
+      Scanner input = new Scanner(new File("/workspace/workspace/ConsumerLab_Code/negativeAdjectives.txt"));
       while(input.hasNextLine()){
         negAdjectives.add(input.nextLine().trim());
       }
