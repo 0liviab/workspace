@@ -15,6 +15,7 @@ public class Board {
   private String guesses = "";
   private String fillGuess = getBlank(phrase);
   private String letter = getLetter();
+  private Boolean playerTurn;
 
   
   public String getBlank(String phrase) {
@@ -63,7 +64,25 @@ public class Board {
     }
   }
 
+
   public void playerOneTurn(){
+    while (playerTurn){
+      checkForBlank();
+      if (phrase.contains(getLetter())){
+        System.out.println(letter + " is in the phrase!");
+        checkForBlank();
+      } else {
+        System.out.println(letter + "is NOT in the phrase!");
+        playerTurn = false;
+      }
+    }
+  }
+
+  //while game not done, while playerTurn = true, p1.getName(); & prompt
+  //while game not done, check playerTurn, p1.getName() + " make a guess", ur wrong playerTurn = false
+
+
+ /* public void playerOneTurn(){
     checkForBlank();
     if (phrase.contains(getLetter())){
       System.out.println(letter + " is in the phrase!");
@@ -84,7 +103,7 @@ public class Board {
       playerOneTurn();
     }
   }
-
+*/
 
   // returns random phrase from phrases.txt
   private String loadPhrase() {
