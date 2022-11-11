@@ -10,8 +10,15 @@ public class Player {
 
     }
 
-    public static String getName(){
-System.out.println("Hello Player! What is your name?");
+    public String getName1(){
+    System.out.println("\n\nHello Player 1! What is your name?");
+    Scanner input = new Scanner(System.in);
+    String name = input.nextLine();
+    return name;
+    }
+
+    public String getName2(){
+    System.out.println("\n\nHello Player 2! What is your name?");
     Scanner input = new Scanner(System.in);
     String name = input.nextLine();
     return name;
