@@ -11,7 +11,7 @@ public class Main {
         System.out.println("\n\nWelcome " + p1.getName1() + " and " + p2.getName2() + "!");
         System.out.println("\nA random phrase is below. Try to guess it!");
 
-        board.checkForBlank();
+        board.playerOneTurn();
     }
 
 
