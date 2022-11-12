@@ -7,12 +7,19 @@ public class Main {
         Player p2 = new Player();
         Board board = new Board();
 
-
         System.out.println("\n\nWelcome " + p1.getName1() + " and " + p2.getName2() + "!");
         System.out.println("\nA random phrase is below. Try to guess it!");
+    
+        while (!board.getStatus()) {
+            board.playerOneTurn(); 
+        board.playerTwoTurn();
+        }
+        
+        System.out.println("You won the game! Congrats");
+       
 
-        board.playerOneTurn();
-    }
+        }
 
 
 }
+

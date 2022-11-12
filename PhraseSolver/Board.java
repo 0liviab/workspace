@@ -11,13 +11,22 @@ public class Board {
    * use word.contains("Y"); to use boolean
    */
 
+
+
+
+
   private String phrase = loadPhrase();
   private String guesses = "";
   private String fillGuess = getBlank(phrase);
-  private String letter = getLetter();
-  private Boolean playerTurn;
+  private Boolean playerTurn = false;
+  private Boolean done = false;
+  public int x; 
 
-  
+
+
+
+
+
   public String getBlank(String phrase) {
     int numLetters = phrase.length();
     String blankPhrase = " ";
@@ -31,12 +40,15 @@ public class Board {
     return blankPhrase;
   }
 
+
   public String getLetter() {
-  System.out.println("\nPlease input a guess:");
-  Scanner sc = new Scanner(System.in);
-  String letter = sc.nextLine();
-  guesses += letter;
-  return letter;
+
+    System.out.println("\nPlease input a guess:");
+    Scanner sc = new Scanner(System.in);  
+    String letter = sc.nextLine();
+    guesses += letter;
+
+    return letter;
   } 
 
   public void checkGuesses(String letter) {
@@ -60,8 +72,15 @@ public class Board {
     checkGuesses(" ");
 
     while (fillGuess.contains("_")) {
+      done = false;
       checkGuesses(getLetter());
+      
     }
+    done = true;
+  }
+
+  public Boolean getStatus(){
+    return done;
   }
 
 
@@ -69,11 +88,24 @@ public class Board {
     while (playerTurn){
       checkForBlank();
       if (phrase.contains(getLetter())){
-        System.out.println(letter + " is in the phrase!");
+        System.out.println(getLetter() + " is in the phrase!");
         checkForBlank();
       } else {
-        System.out.println(letter + "is NOT in the phrase!");
+        System.out.println(getLetter() + "is NOT in the phrase!");
         playerTurn = false;
+      }
+    }
+  }
+
+  public void playerTwoTurn(){
+    while (!playerTurn){
+      checkForBlank();
+      if (phrase.contains(getLetter())){
+        System.out.println(getLetter()+ " is in the phrase!");
+        checkForBlank();
+      } else {
+        System.out.println(getLetter() + "is NOT in the phrase!");
+        playerTurn = true;
       }
     }
   }
