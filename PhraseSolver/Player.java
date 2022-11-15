@@ -10,6 +10,8 @@ public class Player {
 
     }
 
+    String name = "";
+    //gets player one's name
     public String getName1(){
     System.out.println("\n\nHello Player 1! What is your name?");
     Scanner input = new Scanner(System.in);
@@ -17,6 +19,13 @@ public class Player {
     return name;
     }
 
+    public String returnName1(){
+        return name;
+    }
+
+
+
+    //gets player two's name
     public String getName2(){
     System.out.println("\n\nHello Player 2! What is your name?");
     Scanner input = new Scanner(System.in);
