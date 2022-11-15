@@ -11,21 +11,12 @@ public class Board {
    * use word.contains("Y"); to use boolean
    */
 
-
-
-
-
   private String phrase = loadPhrase();
   private String guesses = "";
   private String fillGuess = getBlank(phrase);
-  private Boolean playerTurn = false;
+  private Boolean playerTurn = true;
   private Boolean done = false;
-  public int x; 
-
-
-
-
-
+  private String tempLetter = "";
 
   public String getBlank(String phrase) {
     int numLetters = phrase.length();
@@ -40,102 +31,129 @@ public class Board {
     return blankPhrase;
   }
 
-
   public String getLetter() {
 
     System.out.println("\nPlease input a guess:");
-    Scanner sc = new Scanner(System.in);  
+    Scanner sc = new Scanner(System.in);
     String letter = sc.nextLine();
     guesses += letter;
-
+    tempLetter = letter;
     return letter;
-  } 
+  }
 
   public void checkGuesses(String letter) {
     fillGuess = "";
     for (int i = 0; i < phrase.length(); i++) {
-      if (phrase.substring(i, i+1).equals(" ")) {
+      if (phrase.substring(i, i + 1).equals(" ")) {
         fillGuess += " ";
       } else if (phrase.substring(i, i + 1).equals(letter)) {
         fillGuess += letter;
-      } else if (guesses.contains(phrase.substring(i, i+1))) {
-        fillGuess += phrase.substring(i, i+1);
+      } else if (guesses.contains(phrase.substring(i, i + 1))) {
+        fillGuess += phrase.substring(i, i + 1);
       } else {
         fillGuess += "_";
       }
     }
     System.out.println(fillGuess);
-    System.out.println("\n\nYOUR GUESSES INCLUDE: \n" + guesses);
+    // System.out.println("\n\nYOUR GUESSES INCLUDE: \n" + guesses);
   }
 
   public void checkForBlank() {
     checkGuesses(" ");
 
-    while (fillGuess.contains("_")) {
+    if (fillGuess.contains("_")) {
       done = false;
       checkGuesses(getLetter());
-      
+    } else {
+      done = true;
     }
-    done = true;
+    // done = true;
   }
 
-  public Boolean getStatus(){
+  public Boolean getStatus() {
     return done;
   }
 
+  public void playerOneTurn() {
+    System.out.println("PLAYER ONE'S TURN: \n");
+    while (playerTurn) {
+      checkGuesses(" ");
+      System.out.println("\n\nYOUR GUESSES INCLUDE: \n" + guesses);
 
-  public void playerOneTurn(){
-    while (playerTurn){
-      checkForBlank();
-      if (phrase.contains(getLetter())){
-        System.out.println(getLetter() + " is in the phrase!");
-        checkForBlank();
+      if (fillGuess.contains("_")) {
+        done = false;
+        checkGuesses(getLetter());
+        System.out.println("\n\nYOUR GUESSES INCLUDE: \n" + guesses);
+
       } else {
-        System.out.println(getLetter() + "is NOT in the phrase!");
+        done = true;
+      }
+      
+      // checkForBlank();
+      // returns once the phrase has no more underscores
+      if (phrase.contains(tempLetter)) {
+        System.out.println(tempLetter + " is in the phrase!");
+        checkGuesses(" ");
+        System.out.println("\n\nYOUR GUESSES INCLUDE: \n" + guesses);
+
+        if (fillGuess.contains("_")) {
+          done = false;
+          checkGuesses(getLetter());
+          System.out.println("\n\nYOUR GUESSES INCLUDE: \n" + guesses);
+
+        } else {
+          done = true;
+        }
+        // checkForBlank();
+      } else {
+        System.out.println(tempLetter + " is NOT in the phrase!");
         playerTurn = false;
       }
     }
   }
 
-  public void playerTwoTurn(){
-    while (!playerTurn){
-      checkForBlank();
-      if (phrase.contains(getLetter())){
-        System.out.println(getLetter()+ " is in the phrase!");
-        checkForBlank();
+  public void playerTwoTurn() {
+    System.out.println("PLAYER TWO'S TURN: \n");
+    // System.out.println("p2a playerturn: " + playerTurn);
+
+    while (!playerTurn) {
+      // checkForBlank();
+      checkGuesses(" ");
+      System.out.println("\n\nYOUR GUESSES INCLUDE: \n" + guesses);
+
+      if (fillGuess.contains("_")) {
+        done = false;
+        checkGuesses(getLetter());
+        System.out.println("\n\nYOUR GUESSES INCLUDE: \n" + guesses);
+
       } else {
-        System.out.println(getLetter() + "is NOT in the phrase!");
+        done = true;
+      }
+
+      if (phrase.contains(tempLetter)) {
+        System.out.println(tempLetter + " is in the phrase!");
+        checkGuesses(" ");
+        System.out.println("\n\nYOUR GUESSES INCLUDE: \n" + guesses);
+
+        if (fillGuess.contains("_")) {
+          done = false;
+          checkGuesses(getLetter());
+          System.out.println("\n\nYOUR GUESSES INCLUDE: \n" + guesses);
+
+        } else {
+          done = true;
+        }
+        // checkForBlank();
+      } else {
+        System.out.println(tempLetter + " is NOT in the phrase!");
         playerTurn = true;
       }
     }
   }
 
-  //while game not done, while playerTurn = true, p1.getName(); & prompt
-  //while game not done, check playerTurn, p1.getName() + " make a guess", ur wrong playerTurn = false
-
-
- /* public void playerOneTurn(){
-    checkForBlank();
-    if (phrase.contains(getLetter())){
-      System.out.println(letter + " is in the phrase!");
-      checkForBlank();
-    } else {
-      System.out.println(letter + "is NOT in the phrase!");
-      playerTwoTurn();
-    }
-  }
-
-  public void playerTwoTurn(){
-    checkForBlank();
-    if (phrase.contains(getLetter())){
-      System.out.println(letter + " is in the phrase!");
-      checkForBlank();
-    } else {
-      System.out.println(letter + "is NOT in the phrase!");
-      playerOneTurn();
-    }
-  }
-*/
+  // while game not done, while playerTurn = true, p1.getName(); & prompt
+  // while game not done, check playerTurn, p1.getName() + " make a guess", ur
+  // wrong playerTurn = false
 
   // returns random phrase from phrases.txt
   private String loadPhrase() {
