@@ -109,21 +109,6 @@ public class Board {
     // print out previous guesses
     System.out.println("guesses: \n" + guesses);
 
-    if (Character.isLetter(tempLetter.charAt(0))) {
-      if (tempLetter.length() == 1) {
-        if (fillGuess.contains(tempLetter)) {
-          System.out.println(tempLetter + " is in the phrase!");
-        } else {
-          System.out.println(tempLetter + " is NOT in the phrase!");
-          playerTurn = true;
-        }
-      } else {
-        System.out.println("Your guess wasn't a single letter, so you sacrificed your turn");
-      }
-    } else {
-      System.out.println("Your guess wasn't a letter, so you sacrificed your turn");
-    }
-
     while (playerTurn) {
 
       // if game isn't done, prompt player one for a guess, check if it's in phrase
@@ -138,15 +123,16 @@ public class Board {
               System.out.println(tempLetter + " is in the phrase!");
             } else {
               System.out.println(tempLetter + " is NOT in the phrase!");
-              playerTurn = true;
+              playerTurn = false;
             }
           } else {
             System.out.println("Your guess wasn't a single letter, so you sacrificed your turn");
+            break;
           }
         } else {
           System.out.println("Your guess wasn't a letter, so you sacrificed your turn");
+          break;
         }
-
 
       } else {
         done = true;
@@ -174,7 +160,6 @@ public class Board {
 
     while (!playerTurn) {
       if (fillGuess.contains("_")) {
-
         checkGuesses(getLetter());
         System.out.println("guesses: \n" + guesses);
         if (Character.isLetter(tempLetter.charAt(0))) {
@@ -187,9 +172,11 @@ public class Board {
             }
           } else {
             System.out.println("Your guess wasn't a single letter, so you sacrificed your turn");
+            break;
           }
         } else {
           System.out.println("Your guess wasn't a letter, so you sacrificed your turn");
+          break;
         }
 
       } else {
@@ -199,7 +186,6 @@ public class Board {
     }
   }
 
- 
   // while game not done, while playerTurn = true, p1.getName(); & prompt
   // while game not done, check playerTurn, p1.getName() + " make a guess", ur
   // wrong playerTurn = false
