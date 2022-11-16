@@ -64,7 +64,6 @@ public class Board {
     }
     // prints out the new phrase with their guess included
     System.out.println(fillGuess);
-    // System.out.println("\n\nYOUR GUESSES INCLUDE: \n" + guesses);
   }
 
   // checks if their are still underscores
@@ -90,7 +89,13 @@ public class Board {
 
   // player one's turn
   public void playerOneTurn() {
-    // helper.clearScreen();
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      System.out.println("Oops, something went wrong! Restart the game");
+      ;
+    }
+    helper.clearScreen();
 
     // announces player turn
     System.out.println("PLAYER ONE'S TURN: \n");
@@ -99,137 +104,102 @@ public class Board {
     // if playerTurn is true - player one's turn
     // if playerTurn is false - player two's turn
 
-    
+    // prints out the current phrase with any accurate guesses included
+    checkGuesses(" ");
+    // print out previous guesses
+    System.out.println("guesses: \n" + guesses);
+
+    if (Character.isLetter(tempLetter.charAt(0))) {
+      if (tempLetter.length() == 1) {
+        if (fillGuess.contains(tempLetter)) {
+          System.out.println(tempLetter + " is in the phrase!");
+        } else {
+          System.out.println(tempLetter + " is NOT in the phrase!");
+          playerTurn = true;
+        }
+      } else {
+        System.out.println("Your guess wasn't a single letter, so you sacrificed your turn");
+      }
+    } else {
+      System.out.println("Your guess wasn't a letter, so you sacrificed your turn");
+    }
 
     while (playerTurn) {
-      // prints out the current phrase with any accurate guesses included
-      checkGuesses(" ");
-      // print out previous guesses
-      System.out.println("\n\nguesses: \n" + guesses);
 
       // if game isn't done, prompt player one for a guess, check if it's in phrase
       // and replace if needed
 
       if (fillGuess.contains("_")) {
-        done = false;
         checkGuesses(getLetter());
-
-        if (fillGuess.contains(tempLetter)) {
-          System.out.println(tempLetter + " is in the phrase!");
+        System.out.println("guesses: \n" + guesses);
+        if (Character.isLetter(tempLetter.charAt(0))) {
+          if (tempLetter.length() == 1) {
+            if (fillGuess.contains(tempLetter)) {
+              System.out.println(tempLetter + " is in the phrase!");
+            } else {
+              System.out.println(tempLetter + " is NOT in the phrase!");
+              playerTurn = true;
+            }
+          } else {
+            System.out.println("Your guess wasn't a single letter, so you sacrificed your turn");
+          }
         } else {
-          System.out.println(tempLetter + " is NOT in the phrase!");
+          System.out.println("Your guess wasn't a letter, so you sacrificed your turn");
         }
 
-        System.out.println("\n\nguesses: \n" + guesses);
 
       } else {
         done = true;
         break;
       }
 
-      // returns once the phrase has no more underscores
-      // if phrase contains user's guess, announce that it is in the phrase, replace
-      // phrase appropriately, and print out guesses
-
-      if (phrase.contains(tempLetter)) {
-        System.out.println("I am here");
-        System.out.println(tempLetter + " is in the phrase!");
-        checkGuesses(" ");
-        System.out.println("\n\nguesses: \n" + guesses);
-
-        // as long as guesses are correct, keep prompting, replacing, and printing out
-        if (fillGuess.contains("_")) {
-          checkGuesses(getLetter());
-
-          if (fillGuess.contains(tempLetter)) {
-            System.out.println(tempLetter + " is in the phrase!");
-          } else {
-            System.out.println(tempLetter + " is NOT in the phrase!");
-          }
-          System.out.println("\n\nguesses: \n" + guesses);
-          done = false;
-
-          // when there aren't underscores in phrase, game is done
-        } else {
-          done = true;
-          break;
-        }
-        // when guess is wrong, announce that guess is wrong and switch player turn
-      } else {
-        System.out.println("I am NOT here");
-
-        System.out.println(tempLetter + " is NOT in the phrase!");
-        playerTurn = false;
-      }
+      //
     }
   }
 
   // same comments as playerOneTurn()
   public void playerTwoTurn() {
-    // helper.clearScreen();
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      System.out.println("Oops, something went wrong! Restart the game");
+      ;
+    }
+    helper.clearScreen();
 
     System.out.println("PLAYER TWO'S TURN: \n");
 
-    while (!playerTurn && fillGuess.contains("_")) {
-      checkGuesses(" ");
-      System.out.println("\n\nguesses: \n" + guesses);
-      checkGuesses(getLetter());
-      if (fillGuess.contains(tempLetter)) {
-        System.out.println(tempLetter + " is in the phrase!");
-      } else {
-        System.out.println(tempLetter + " is NOT in the phrase!");
-      }
+    checkGuesses(" ");
+    System.out.println("guesses: \n" + guesses);
 
+    while (!playerTurn) {
+      if (fillGuess.contains("_")) {
 
-      /*if (fillGuess.contains("_")) {
-        done = false;
         checkGuesses(getLetter());
-
-        if (fillGuess.contains(tempLetter)) {
-          System.out.println(tempLetter + " is in the phrase!");
+        System.out.println("guesses: \n" + guesses);
+        if (Character.isLetter(tempLetter.charAt(0))) {
+          if (tempLetter.length() == 1) {
+            if (fillGuess.contains(tempLetter)) {
+              System.out.println(tempLetter + " is in the phrase!");
+            } else {
+              System.out.println(tempLetter + " is NOT in the phrase!");
+              playerTurn = true;
+            }
+          } else {
+            System.out.println("Your guess wasn't a single letter, so you sacrificed your turn");
+          }
         } else {
-          System.out.println(tempLetter + " is NOT in the phrase!");
+          System.out.println("Your guess wasn't a letter, so you sacrificed your turn");
         }
-        System.out.println("\n\nguesses: \n" + guesses);
 
       } else {
         done = true;
         break;
       }
-      */
-
-      if (phrase.contains(tempLetter)) {
-        System.out.println("I am here");
-
-        System.out.println(tempLetter + " is in the phrase!");
-        checkGuesses(" ");
-        System.out.println("\n\nguesses: \n" + guesses);
-
-        if (fillGuess.contains("_")) {
-          done = false;
-          checkGuesses(getLetter());
-
-          if (fillGuess.contains(tempLetter)) {
-            System.out.println(tempLetter + " is in the phrase!");
-          } else {
-            System.out.println(tempLetter + " is NOT in the phrase!");
-          }
-          System.out.println("\n\nguesses: \n" + guesses);
-
-        } else {
-          done = true;
-          break;
-        }
-
-      } else {
-        System.out.println("I am NOT here");
-        System.out.println(tempLetter + " is NOT in the phrase!");
-        playerTurn = true;
-      }
     }
-    done = true;
   }
 
+ 
   // while game not done, while playerTurn = true, p1.getName(); & prompt
   // while game not done, check playerTurn, p1.getName() + " make a guess", ur
   // wrong playerTurn = false
