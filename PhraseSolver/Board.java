@@ -162,7 +162,8 @@ public class Board {
       if (fillGuess.contains("_")) {
         checkGuesses(getLetter());
         System.out.println("guesses: \n" + guesses);
-        if (Character.isLetter(tempLetter.charAt(0))) {
+        if (guesses.contains(tempLetter)){
+          if (Character.isLetter(tempLetter.charAt(0))) {
           if (tempLetter.length() == 1) {
             if (fillGuess.contains(tempLetter)) {
               System.out.println(tempLetter + " is in the phrase!");
@@ -178,6 +179,11 @@ public class Board {
           System.out.println("Your guess wasn't a letter, so you sacrificed your turn");
           break;
         }
+        } else {
+          System.out.println("That was already guessed, so you sacrificed your turn");
+          break;
+        }
+        
 
       } else {
         done = true;
