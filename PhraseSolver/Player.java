@@ -15,7 +15,7 @@ public class Player {
 
     // gets player one's name
     public String getName1() {
-        System.out.println("\n\nHello Player 1! What is your name?");
+        System.out.println("Hello Player 1! What is your name?");
         Scanner input = new Scanner(System.in);
         String name = input.nextLine();
         return name;
@@ -23,7 +23,7 @@ public class Player {
 
     // gets player two's name
     public String getName2() {
-        System.out.println("\n\nHello Player 2! What is your name?");
+        System.out.println("Hello Player 2! What is your name?");
         Scanner input = new Scanner(System.in);
         String name = input.nextLine();
         return name;

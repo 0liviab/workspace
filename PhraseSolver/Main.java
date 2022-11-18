@@ -6,16 +6,17 @@ public class Main {
         Player p1 = new Player();
         Player p2 = new Player();
         Board board = new Board();
-        helper help = new helper();
+        Helper help = new Helper();
 
         // welcomes new player to game, introduces them
-        System.out.println("\n\nWelcome " + p1.getName1() + " and " + p2.getName2() + "!");
+        help.clearScreen();
+        System.out.println("Welcome " + p1.getName1() + " and " + p2.getName2() + "!");
         System.out.println("            ____  __                            _____       __              ");
         System.out.println("        / __  `/ /_  _________ _________     / ___/____  / /   _____  _____");
         System.out.println("       / /_/ / __  / ___/ __ `/ ___/ _ `    `__ `/ __ `/ / | / / _ `/ ___/        ");
         System.out.println("      / ____/ / / / /  / /_/ (__  )  __/   ___/ / /_/ / /| |/ /  __/ /    ");
         System.out.println("     /_/   /_/ /_/_/   `__,_/____/`___/   /____/`____/_/ |___/`___/_/     "); 
-        System.out.println("\nA random phrase is below. Try to guess it!");
+        System.out.println("\n\nA random phrase is below. Try to guess it!");
 
         // while there are still underscores in the phrase (while the game is not done)
         while (!board.getStatus()) {
@@ -28,14 +29,13 @@ public class Main {
         }
 
         // once game is over, end program
-        System.out.println("\n\nYou won the game! Congrats");
+        help.clearScreen();
+        System.out.println("Congrats");
+        System.out.println("        __  ______  __  __   _       _______   __");
+        System.out.println("        ` `/ / __ `/ / / /  | |     / /  _/ | / / ");
+        System.out.println("         `  / / / / / / /   | | /| / // //  |/ /  ");
+        System.out.println("         / / /_/ / /_/ /    | |/ |/ // // /|  /  ");
+        System.out.println("        /_/`____/`____/     |__/|__/___/_/ |_/   ");
 
     }
-
-    /*
-     * QUESTIONS:
-     * How to have methods wait a few seconds before running? To let players read
-     * welcome message then clear screen (not immediately)
-     */
-
 }

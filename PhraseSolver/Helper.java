@@ -1,6 +1,6 @@
 package PhraseSolver;
 
-public class helper {
+public class Helper {
 
     //clears screen to make game more legible
     public static void clearScreen() {  

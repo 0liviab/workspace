@@ -40,7 +40,7 @@ public class Board {
 
     System.out.println("\nPlease input a guess:");
     Scanner sc = new Scanner(System.in);
-    String letter = sc.nextLine();
+    String letter = sc.nextLine().toLowerCase();
     guesses += letter;
     tempLetter = letter;
     return letter;
@@ -95,7 +95,7 @@ public class Board {
       System.out.println("Oops, something went wrong! Restart the game");
       ;
     }
-    helper.clearScreen();
+    Helper.clearScreen();
 
     // announces player turn
     System.out.println("PLAYER ONE'S TURN: \n");
@@ -117,29 +117,37 @@ public class Board {
       if (fillGuess.contains("_")) {
         checkGuesses(getLetter());
         System.out.println("guesses: \n" + guesses);
-        if (Character.isLetter(tempLetter.charAt(0))) {
-          if (tempLetter.length() == 1) {
-            if (fillGuess.contains(tempLetter)) {
-              System.out.println(tempLetter + " is in the phrase!");
+
+          if (Character.isLetter(tempLetter.charAt(0))) {
+            if (tempLetter.length() == 1) {
+
+              if (fillGuess.contains(tempLetter)) {
+
+                System.out.println(tempLetter + " is in the phrase!");
+
+              } else {
+
+                System.out.println(tempLetter + " is NOT in the phrase!");
+                System.out.println("Your turn is over...");
+                playerTurn = false;
+
+              }
+
             } else {
-              System.out.println(tempLetter + " is NOT in the phrase!");
-              playerTurn = false;
+
+              System.out.println("Your guess wasn't a single letter, so you sacrificed your turn");
+              break;
             }
           } else {
-            System.out.println("Your guess wasn't a single letter, so you sacrificed your turn");
+
+            System.out.println("Your guess wasn't a letter, so you sacrificed your turn");
             break;
           }
+        
         } else {
-          System.out.println("Your guess wasn't a letter, so you sacrificed your turn");
+          done =true;
           break;
         }
-
-      } else {
-        done = true;
-        break;
-      }
-
-      //
     }
   }
 
@@ -151,7 +159,7 @@ public class Board {
       System.out.println("Oops, something went wrong! Restart the game");
       ;
     }
-    helper.clearScreen();
+    Helper.clearScreen();
 
     System.out.println("PLAYER TWO'S TURN: \n");
 
@@ -160,34 +168,43 @@ public class Board {
 
     while (!playerTurn) {
       if (fillGuess.contains("_")) {
+
         checkGuesses(getLetter());
         System.out.println("guesses: \n" + guesses);
-        if (guesses.contains(tempLetter)){
+
           if (Character.isLetter(tempLetter.charAt(0))) {
-          if (tempLetter.length() == 1) {
-            if (fillGuess.contains(tempLetter)) {
-              System.out.println(tempLetter + " is in the phrase!");
+
+            if (tempLetter.length() == 1) {
+
+              if (fillGuess.contains(tempLetter)) {
+
+                System.out.println(tempLetter + " is in the phrase!");
+
+              } else {
+
+                System.out.println(tempLetter + " is NOT in the phrase!");
+                System.out.println("Your turn is over...");
+                playerTurn = true;
+
+              }
             } else {
-              System.out.println(tempLetter + " is NOT in the phrase!");
-              playerTurn = true;
+
+              System.out.println("Your guess wasn't a single letter, so you sacrificed your turn");
+              break;
+
             }
           } else {
-            System.out.println("Your guess wasn't a single letter, so you sacrificed your turn");
+
+            System.out.println("Your guess wasn't a letter, so you sacrificed your turn");
             break;
+
           }
-        } else {
-          System.out.println("Your guess wasn't a letter, so you sacrificed your turn");
-          break;
-        }
-        } else {
-          System.out.println("That was already guessed, so you sacrificed your turn");
-          break;
-        }
-        
 
       } else {
+
         done = true;
         break;
+
       }
     }
   }
