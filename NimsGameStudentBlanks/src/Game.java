@@ -7,6 +7,7 @@ public class Game {
     private Scanner sc = new Scanner(System.in);
     //private int x;
     public boolean turn;
+    public int take;
 
     //Sets up the game with a random amount of pieces between 10 and 50
     //Sets up the players so they can be accessed
@@ -20,19 +21,18 @@ public class Game {
     //Adds the amount of pieces taken to the user's score.
     public int takePiece(){
         System.out.println("There are " + pieces + " remaining!");
-        int take;
         System.out.println("How many would " + currentPlayer.getName()+ " like to take?");
         take = Integer.parseInt(sc.nextLine());
        //DONE: Grab the user amount of pieces and repeat if it not allowed.
         while (!isLegal(take)){
-            System.out.println("Try again. \n\n How many would you like to take?");
+            System.out.println("Try again. \n\nHow many would you like to take?");
             take = Integer.parseInt(sc.nextLine());
             isLegal(take);
         }
         //DONE: Adjust the pieces
         pieces = pieces - take;
         System.out.println("There are " + pieces + " remaining!");
-        System.out.println("-----------------------");
+        System.out.println("\n-----------------------\n");
         return take;
     }
 

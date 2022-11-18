@@ -3,16 +3,20 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
+        Helper help = new Helper();
 
+        help.clearScreen();
         //Asks the user to input their name for the player
         System.out.println("What is player 1's name?: ");
         String p1Name = sc.nextLine();
+        p1Name = p1Name.substring(0,1).toUpperCase() + p1Name.substring(1);
         Player p1 = new Player(p1Name);
         //DONE: Create Player 1
 
         //Asks the user to input their name for the player.
         System.out.println("What is player 2's name?: ");
         String p2Name = sc.nextLine();
+        p2Name = p2Name.substring(0,1).toUpperCase() + p2Name.substring(1);
         Player p2 = new Player(p2Name);
         //DONE: Create Player 2
 
@@ -40,6 +44,7 @@ public class Main {
                game.takePiece();
                 
                currentPlayer = game.getNextPlayer();
+               Player.adjustScore(game.take);
 
                if (currentPlayer == p1) {
                 game.turn = false;
@@ -48,10 +53,12 @@ public class Main {
                }
                
             }
+
+            help.clearScreen();
             System.out.println(currentPlayer.getName()+ " Won!!");
             System.out.println(p1.getName() +" had removed "+ p1.getScore()+" pieces!");
             System.out.println(p2.getName() +" had removed "+ p2.getScore()+" pieces!");
-            System.out.println("------------------------------------------");
+            System.out.println("\n------------------------------------------\n");
             System.out.println("Enter q to quit, enter anything else to play again.");
             again = sc.nextLine();
         }

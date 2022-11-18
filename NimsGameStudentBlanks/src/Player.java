@@ -1,12 +1,12 @@
 public class Player {
-    private int score = 0;
+    private static int score = 0;
     private String name;
 
     //DO NOT CHANGE
     public Player(String name){
 
         this.name = name;
-        System.out.println("-----------------------------");
+        System.out.println("\n-----------------------------\n");
     }
 
     //DONE
@@ -20,7 +20,7 @@ public class Player {
       
     }
 
-    public void adjustScore(int x){
+    public static void adjustScore(int x){
         score +=x;
     }
 }
