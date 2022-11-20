@@ -55,9 +55,9 @@ public class Main {
             }
 
             help.clearScreen();
-            System.out.println(currentPlayer.getName()+ " Won!!");
-            System.out.println(p1.getName() +" had removed "+ p1.getScore()+" pieces!");
-            System.out.println(p2.getName() +" had removed "+ p2.getScore()+" pieces!");
+            System.out.println(currentPlayer.getName()+ " won!!");
+            System.out.println(p1.getName() +" removed "+ p1.getScore()+" pieces!");
+            System.out.println(p2.getName() +" removed "+ p2.getScore()+" pieces!");
             System.out.println("\n------------------------------------------\n");
             System.out.println("Enter q to quit, enter anything else to play again.");
             again = sc.nextLine();

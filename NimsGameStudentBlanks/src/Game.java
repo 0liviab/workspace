@@ -52,8 +52,11 @@ public class Game {
     //Checks whether or not the user's requested move is allowed or not.
     public boolean isLegal(int x){
         boolean legal;
-        if (x <= (pieces*.5) && x >= 0 || x == 1){
+        if (x <= (pieces*.5) && x > 0 || x == 1){
             legal = true;
+        } else  if (x <= 0){
+            System.out.println("Your input was less than one, and is consequently invalid.");
+            legal = false;
         } else {
             System.out.println("Your input was more than half of the pot, and is consquently invalid.");
             legal = false;
